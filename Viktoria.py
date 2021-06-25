@@ -1,4 +1,4 @@
-import pygame as pg
+import pygame
 import sys
 #### from pygame.locals import * - чтобы меньше писать
 
@@ -9,39 +9,39 @@ x = 480
 y = 350
 PUR = (100, 128, 255)
 
-pg.init()
-sc = pg.display.set_mode ((W,H)) #длина высота окна
-pg.draw.rect(sc, PUR, (x, y, 60, 60), 8)
+pygame.init()
+sc = pygame.display.set_mode ((W,H)) #длина высота окна
+pygame.draw.rect(sc, PUR, (x, y, 60, 60), 8)
 
-clock = pg.time.Clock()
+clock = pygame.time.Clock()
 
 
 
-pg.display.update() #обновление экрана
+pygame.display.update() #обновление экрана
 
 
 while True:
 
-    for i in pg.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
-        if i.type == pg.QUIT:
+    for i in pygame.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
+        if i.type == pygame.QUIT:
             sys.exit()  # кнц
-        elif i.type == pg.KEYDOWN:
-            if i.key == pg.K_LEFT:
+        elif i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_LEFT:
                 x -= 15
-            elif i.key == pg.K_RIGHT:
+            elif i.key == pygame.K_RIGHT:
                 x += 15
-            elif i.key == pg.K_UP:
+            elif i.key == pygame.K_UP:
                 y -= 15
-            elif i.key == pg.K_DOWN:
+            elif i.key == pygame.K_DOWN:
                 y += 15
 
 
     sc.fill((0,0,0))
-    pg.draw.rect(sc, PUR, (x, y, 60, 60), 8)
+    pygame.draw.rect(sc, PUR, (x, y, 60, 60), 8)
     clock.tick(FPS)  # задержка
 
 
-    pg.display.update()
+    pygame.display.update()
 
 
 
