@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Code.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Code.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span>
+<span class="s0">import </span><span class="s1">random</span>
+
+<span class="s1">pygame.init()</span>
+<span class="s1">pygame.mixer.init()</span>
+<span class="s1">pygame.mixer.music.load(</span><span class="s2">&quot;anotherday.ogg&quot;</span><span class="s1">)</span>
+<span class="s1">pygame.mixer.music.set_volume(</span><span class="s3">0.5</span><span class="s1">)</span>
+<span class="s1">pygame.mixer.music.play(loops=-</span><span class="s3">1</span><span class="s1">)</span>
+<span class="s1">WIDTH = </span><span class="s3">800</span>
+<span class="s1">HEIGHT = </span><span class="s3">600</span>
+<span class="s1">FPS = </span><span class="s3">60</span>
+
+<span class="s1">screen = pygame.display.set_mode((</span><span class="s3">800</span><span class="s0">, </span><span class="s3">600</span><span class="s1">))</span>
+<span class="s1">pygame.display.set_caption(</span><span class="s2">&quot;Area&quot;</span><span class="s1">)</span>
+<span class="s1">clock = pygame.time.Clock()</span>
+
+<span class="s0">while True</span><span class="s1">:</span>
+
+    <span class="s0">for </span><span class="s1">event </span><span class="s0">in </span><span class="s1">pygame.event.get():</span>
+        <span class="s0">if </span><span class="s1">event.type == pygame.QUIT:</span>
+            <span class="s1">pygame.quit()</span>
+</pre>
+</body>
+</html>
