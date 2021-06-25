@@ -12,7 +12,7 @@ HEIGHT = 600
 FPS = 60
 clock = pygame.time.Clock()
 area = pg.image.load("Area.png")
-screen = pygame.display.set_mode((1680,1020))
+screen = pygame.display.set_mode((1680, 1020))
 x = 100
 y = 100
 screen.blit(area, (300, 300))
