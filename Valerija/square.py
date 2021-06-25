@@ -14,3 +14,5 @@ sc = pygame.display.set_mode((width, height))
 sc.fill((255, 255, 255))
 
 pg.draw.rect(sc, (255, 0, 0), (x, y, 150, 85), 10)
+
+pygame.display.update()    #  обновление экрана
