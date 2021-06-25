@@ -10,6 +10,7 @@ pygame.mixer.music.play(loops=-1)
 WIDTH = 800
 HEIGHT = 600
 FPS = 60
+clock = pygame.time.Clock()
 area = pg.image.load("Area.png")
 screen = pygame.display.set_mode((1680,1020))
 x = 100
