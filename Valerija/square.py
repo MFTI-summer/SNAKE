@@ -2,10 +2,15 @@ import pygame as pg
 import sys
 
 FPS = 60
+width = 800   #   длина и ширина окна
+height = 600
+x = 300     #  координаты верхней точки квадрата
+y = 250
 
-pg.init()
-sc = pg.display.set_mode((800, 600))
 
-pg.display.update()
+clock = pygame.time.Clock()
+sc = pygame.display.set_mode((width, height))
 
-pg.draw.rect(sc, (255, 0, 0), (150, 20, 150, 85), 10)
+sc.fill((255, 255, 255))
+
+pg.draw.rect(sc, (255, 0, 0), (x, y, 150, 85), 10)
