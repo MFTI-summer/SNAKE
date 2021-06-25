@@ -17,25 +17,27 @@ Code.py</font>
 </center></td></tr></table>
 <pre><span class="s0">import </span><span class="s1">pygame</span>
 <span class="s0">import </span><span class="s1">random</span>
-
+<span class="s0">import </span><span class="s1">pygame </span><span class="s0">as </span><span class="s1">pg</span>
+<span class="s0">import </span><span class="s1">sys</span>
 <span class="s1">pygame.init()</span>
 <span class="s1">pygame.mixer.init()</span>
 <span class="s1">pygame.mixer.music.load(</span><span class="s2">&quot;anotherday.ogg&quot;</span><span class="s1">)</span>
-<span class="s1">pygame.mixer.music.set_volume(</span><span class="s3">0.5</span><span class="s1">)</span>
+<span class="s1">pygame.mixer.music.set_volume(</span><span class="s3">0.1</span><span class="s1">)</span>
 <span class="s1">pygame.mixer.music.play(loops=-</span><span class="s3">1</span><span class="s1">)</span>
 <span class="s1">WIDTH = </span><span class="s3">800</span>
 <span class="s1">HEIGHT = </span><span class="s3">600</span>
 <span class="s1">FPS = </span><span class="s3">60</span>
-
-<span class="s1">screen = pygame.display.set_mode((</span><span class="s3">800</span><span class="s0">, </span><span class="s3">600</span><span class="s1">))</span>
-<span class="s1">pygame.display.set_caption(</span><span class="s2">&quot;Area&quot;</span><span class="s1">)</span>
-<span class="s1">clock = pygame.time.Clock()</span>
-
-<span class="s0">while True</span><span class="s1">:</span>
-
+<span class="s1">area = pg.image.load(</span><span class="s2">&quot;Area.bmp&quot;</span><span class="s1">)</span>
+<span class="s1">screen = pygame.display.set_mode((</span><span class="s3">1680</span><span class="s0">,</span><span class="s3">1020</span><span class="s1">))</span>
+<span class="s1">x = </span><span class="s3">100</span>
+<span class="s1">y = </span><span class="s3">100</span>
+<span class="s1">screen.blit(area</span><span class="s0">, </span><span class="s1">(</span><span class="s3">300</span><span class="s0">, </span><span class="s3">300</span><span class="s1">))</span>
+<span class="s1">game = </span><span class="s0">True</span>
+<span class="s0">while </span><span class="s1">game:</span>
     <span class="s0">for </span><span class="s1">event </span><span class="s0">in </span><span class="s1">pygame.event.get():</span>
         <span class="s0">if </span><span class="s1">event.type == pygame.QUIT:</span>
-            <span class="s1">pygame.quit()</span>
+            <span class="s1">game = </span><span class="s0">False</span>
+<span class="s1">pygame.quit()</span>
 </pre>
 </body>
 </html>
