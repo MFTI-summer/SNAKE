@@ -16,9 +16,11 @@ snake = pg.image.load("Snake.bmp")
 screen = pygame.display.set_mode((w, h))
 x = 100
 y = 100
-screen.blit(area, (500, 100))
+
 game = True
 while game:
+    screen.blit(area, (500, 100))
+    screen.blit(snake, (875, 375))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game = False
