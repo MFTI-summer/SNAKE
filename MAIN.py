@@ -16,9 +16,12 @@ FPS = 60
 clock = pg.time.Clock()
 
 # SNAKE HEAD ГОЛОВА ЗМЕИ
-x = 480
-y = 350
+
 PUR = (100, 128, 255)  #ЦВЕТ ЗМЕИ
+
+head = pg.draw.rect(sc, PUR, (480, 350, 60, 60), 8)
+apple = pg.draw.circle(sc, (255, 0,0), (100, 100), 30)
+
 
 speed_x = 0
 speed_y = 0
@@ -27,22 +30,30 @@ speed_y = 0
 
 
 while True:
+    clock.tick(FPS)  # задержка
+
 
     for i in pg.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
         if i.type == pg.QUIT:
             sys.exit()  # кнц
         elif i.type == pg.KEYDOWN:
             if i.key == pg.K_LEFT:
-                x -= 15
+                speed_x = -5
+
             elif i.key == pg.K_RIGHT:
-                x += 15
+                speed_x = 5
+
             elif i.key == pg.K_UP:
-                y -= 15
+                speed_y = -5
             elif i.key == pg.K_DOWN:
-                y += 15
+                speed_y = 5
+
+    head.x += speed_x
+    head.y += speed_y
 
     sc.fill((0, 0, 0))
-    pg.draw.rect(sc, PUR, (x, y, 60, 60), 8)
-    clock.tick(FPS)  # задержка
+    pg.draw.rect(sc, PUR, head, 8)
+    pg.draw.circle(sc, (255,0,0),  apple.center, apple.width//2 )
+
 
     pg.display.update()  # обновление экрана
