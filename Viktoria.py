@@ -35,7 +35,7 @@ while True:
  clock.tick(FPS) #задержка
 
 
-pg.display.update()
+  pg.display.update()
 
 
 
