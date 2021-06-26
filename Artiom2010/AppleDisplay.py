@@ -20,12 +20,12 @@ y = 375
 
 game = True
 while game:
+    screen.blit(apple, (200, 200))
+    pg.display.update()
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             game = False
-        else:
-            screen.blit(apple, (400, 200))
-pg.display.update()
+
 
 
 
