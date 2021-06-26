@@ -45,7 +45,7 @@ while True:
 
             elif i.key == pg.K_UP:
                 speed_y = -5
-            elif i.key == pg.K_DOWN:
+            elif i.key == pg.K_DOWN:0
                 speed_y = 5
 
     head.x += speed_x
