@@ -6,20 +6,19 @@ width = 800   #   длина и ширина окна
 height = 600
 x = 300     #  координаты верхней точки квадрата
 y = 250
-STOP = "stop"
+
 
 pygame.init()
 clock = pygame.time.Clock()
-sc = pygame.display.set_mode((width, height), pygame.RESIZABLE)
+sc = pygame.display.set_mode((width, height))
 
 sc.fill((255, 255, 255))
 
 pygame.draw.rect(sc, (255, 0, 0), (x, y, 85, 85), 10)
-pygame.draw.aaline(sc, (255, 0, 0), [10, 30], [290, 15],)
-pygame.draw.aalines(sc, (255, 0, 0), True,[[10, 10], [140, 70],  [280, 20]], )
 
 
-motion = STOP
+
+
 while True:
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
@@ -39,6 +38,8 @@ while True:
     #pygame.display.update()
 
     pygame.draw.rect(sc, (255, 0, 0) , (x, y, 85, 85), 10)
+    pygame.draw.aaline(sc, (255, 0, 0), [10, 30], [290, 15],)
+    pygame.draw.aalines(sc, (255, 0, 0), True,[[10, 10], [140, 70],  [280, 20]], )
     pygame.display.update()
     clock.tick(FPS)
 

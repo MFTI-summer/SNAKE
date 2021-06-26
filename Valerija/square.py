@@ -38,22 +38,31 @@ while True:
     for i in pg.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
         if i.type == pg.QUIT:
             sys.exit()  # кнц
-        elif i.type == pg.KEYDOWN:                 #  сделаны границы, но убрана скорость.Не знаю, как оставить скорость
-
+        elif i.type == pg.KEYDOWN:                     #   не знаю, как связать со скоростью границы
             if i.key == pg.K_LEFT:
                 if x > 0:
-                    speed_x = -10
+                    speed_x = -5
+                else:
+                    speed_x = 0
 
             elif i.key == pg.K_RIGHT:
                 if x < 1000:
-                    speed_x = 10
+                    speed_x = 5
+                else:
+                    speed_x = 0
 
             elif i.key == pg.K_UP:
                 if y > 0:
-                    speed_y = -10
+                    speed_y = -5
+                else:
+                    speed_y = 0
+
             elif i.key == pg.K_DOWN:
                 if y < 800:
-                    speed_y = 10
+                    speed_y = 5
+                else:
+                    speed_y = 0
+
 
 
     head.x += speed_x
