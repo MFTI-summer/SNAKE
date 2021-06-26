@@ -5,16 +5,15 @@ import sys
 
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.set_volume(1)
 pygame.mixer.music.load("musictest1.ogg")
-pygame.mixer.music.load("musictest2.ogg")
-pygame.mixer.music.load("musictest3.ogg")
-pygame.mixer.music.load("musictest4.ogg")
-pygame.mixer.music.queue("musictest1.ogg")
+pygame.mixer.music.play(loops=1)
 pygame.mixer.music.queue("musictest2.ogg")
+pygame.mixer.music.play(loops=1)
 pygame.mixer.music.queue("musictest3.ogg")
+pygame.mixer.music.play(loops=1)
 pygame.mixer.music.queue("musictest4.ogg")
-pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.play(loops=1)
 w = 1680
 h = 1020
 FPS = 60
