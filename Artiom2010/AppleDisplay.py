@@ -15,12 +15,12 @@ clock = pg.time.Clock()
 apple = pygame.image.load("apple.png")
 
 screen = pygame.display.set_mode((w, h))
-x = 875
-y = 375
+x = 825
+y = 400
 
 game = True
 while game:
-    screen.blit(apple, (200, 200))
+    screen.blit(apple, (x, y))
     pg.display.update()
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
