@@ -11,21 +11,20 @@ h = 1020
 FPS = 60
 clock = pg.time.Clock()
 
-area = pg.image.load("Area.png")
-apple = pg.image.load("apple.png")
-snake = pg.image.load("Snake.bmp")
-screen = pygame.display.set_mode((w, h))
 
+apple = pygame.image.load("apple.png")
+
+screen = pygame.display.set_mode((w, h))
 x = 875
 y = 375
 
 game = True
 while game:
-    screen.blit(apple, (400, 200))
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             game = False
-
+        else:
+            screen.blit(apple, (400, 200))
 pg.display.update()
 
 
