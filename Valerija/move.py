@@ -21,17 +21,21 @@ while True:
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             sys.exit()
-        elif i.type == pygame.KEYDOWN:
-            if i.key == pygame.K_LEFT:
-                x -= 15
-            elif i.key == pygame.K_RIGHT:
-                x += 15
-            elif i.key == pygame.K_UP:
-                y -=15
-            elif i.key == pygame.K_DOWN:
-                y +=15
+    keys = pygame.key.get_pressed()      #тут сделаны границы
+    if keys[pygame.K_LEFT]:
+        if x > 0:
+            x -= 10
+    if keys[pygame.K_RIGHT]:
+        if x < 800:
+            x += 10
+    if keys[pygame.K_UP]:
+        if y > 0:
+            y -= 10
+    if keys[pygame.K_DOWN]:
+        if y < 600:
+            y += 10
 
-    sc.fill(white)
+    sc.fill((255, 255, 255))
     pygame.draw.circle(sc, pink, (x, y), r)
     pygame.display.update()
     clock.tick(FPS)
