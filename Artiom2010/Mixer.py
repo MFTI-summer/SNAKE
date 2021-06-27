@@ -27,7 +27,7 @@ while game:
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.unload()
         print(mt)
-        if mt >= 10:
+        if mt >= 3:
             mt = 0
         nm = "music"+str(mt+1)+".ogg"
         mt = mt+1
