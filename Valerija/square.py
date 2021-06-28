@@ -19,10 +19,12 @@ clock = pg.time.Clock()
 # SNAKE HEAD ГОЛОВА ЗМЕИ
 
 PUR = (100, 128, 255)  #ЦВЕТ ЗМЕИ
+WAP = (45, 210, 31)
 x = 480
 y = 350
 head = pg.draw.rect(sc, PUR, (x, y, 60, 60), 8)
 apple = pg.draw.circle(sc, (255, 0,0), (100, 100), 30)
+pg.draw.rect(sc, WAP, (0, 0, 1000, 800), 10)
 
 
 speed_x = 0
@@ -71,6 +73,7 @@ while True:
     sc.fill((0, 0, 0))
     pg.draw.rect(sc, PUR, head, 8)
     pg.draw.circle(sc, (255,0,0),  apple.center, apple.width//2 )
+    pg.draw.rect(sc, WAP, (0, 0, 1000, 800), 10)
 
 
 
