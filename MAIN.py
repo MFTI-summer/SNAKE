@@ -112,6 +112,9 @@ while game:
     if snake.rect.top <= 0 or snake.rect.bottom >= H:
         game = False
 
+    if snake.rect.left <= 0 or snake.rect.right >= W:
+        game = False
+
 
 
 
