@@ -15,7 +15,7 @@ sc = pg.display.set_mode((W, H))  # длина высота окна
 FPS = 60
 clock = pg.time.Clock()
 
-# SNAKE HEAD ГОЛОВА ЗМЕИ
+# snake HEAD ГОЛОВА ЗМЕИ
 
 PUR = (100, 128, 255)  #ЦВЕТ ЗМЕИ
 
