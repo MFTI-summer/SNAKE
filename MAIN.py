@@ -82,15 +82,15 @@ speed_y = 0
 
 
 
-
-while True:
+game = True
+while game:
     clock.tick(FPS)  # задержка
 
     #play_music()
 
     for i in pg.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
         if i.type == pg.QUIT:
-            sys.exit()  # кнц
+            game = False
         elif i.type == pg.KEYDOWN:
             if i.key == pg.K_LEFT:
                 speed_x = -5
@@ -106,12 +106,20 @@ while True:
     snake.rect.x += speed_x
     snake.rect.y += speed_y
 
+    if apple.rect.colliderect(snake.rect):
+        print(123)
+
+    if snake.rect.top <= 0 or snake.rect.bottom >= H:
+        game = False
+
+
+
     sc.fill((0, 0, 0))
-    # pg.draw.rect(sc, PUR, head, 8)
-    # pg.draw.circle(sc, (255,0,0),  apple.center, apple.width//2 )
 
     sc.blit(apple.image, apple.rect)
     sc.blit(snake.image, snake.rect)
 
 
     pg.display.update()  # обновление экрана
+
+pg.quit()
