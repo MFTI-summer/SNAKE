@@ -114,6 +114,8 @@ while game:
 
 
 
+
+
     sc.fill((0, 0, 0))
 
     sc.blit(apple.image, apple.rect)
