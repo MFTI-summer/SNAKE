@@ -26,7 +26,7 @@ def play_music():
         # mt%= 4
 
         mt += 1
-        nm = f"SOUNDS/musictest{mt}.ogg"
+        nm = f"SOUNDS/music{mt}.ogg"
         pygame.mixer.music.load(nm)
         pygame.mixer.music.play(loops=1)
 
@@ -86,7 +86,7 @@ game = True
 while game:
     clock.tick(FPS)  # задержка
 
-    #play_music()
+    play_music()
 
     for i in pg.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
         if i.type == pg.QUIT:
