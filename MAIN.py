@@ -9,9 +9,9 @@ pg.init()
 #МУЗЫКА
 pygame.mixer.init()
 pygame.mixer.music.set_volume(0.1)
-pygame.mixer.music.load("SOUNDS/musictest1.ogg")
-mt = 1
-pygame.mixer.music.play(loops=1)
+pygame.mixer.music.load("SOUNDS/music1.ogg")
+mt = 0
+
 
 
 
