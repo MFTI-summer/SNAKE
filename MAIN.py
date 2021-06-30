@@ -9,9 +9,9 @@ pg.init()
 #МУЗЫКА
 pygame.mixer.init()
 pygame.mixer.music.set_volume(0.1)
-pygame.mixer.music.load("SOUNDS/musictest1.ogg")
-mt = 1
-pygame.mixer.music.play(loops=1)
+pygame.mixer.music.load("SOUNDS/music1.ogg")
+mt = 0
+
 
 
 
@@ -23,10 +23,8 @@ def play_music():
         print('mt', mt)
         if mt >= 3:
             mt = 0
-        # mt%= 4
-
         mt += 1
-        nm = f"SOUNDS/musictest{mt}.ogg"
+        nm = f"SOUNDS/music{mt}.ogg"
         pygame.mixer.music.load(nm)
         pygame.mixer.music.play(loops=1)
 
@@ -88,7 +86,7 @@ game = True
 while game:
     clock.tick(FPS)  # задержка
 
-    #play_music()
+    play_music()
 
     for i in pg.event.get():  # в пг из папки ивент фн гет, присваиает перем зн
         if i.type == pg.QUIT:
@@ -113,7 +111,16 @@ while game:
 
     if snake.rect.top <= 0 or snake.rect.bottom >= H:
         game = False
+
         ## TODO Змея должна вернуться в начало
+
+
+    if snake.rect.left <= 0 or snake.rect.right >= W:
+        game = False
+
+
+
+
 
 
     sc.fill((0, 0, 0))
