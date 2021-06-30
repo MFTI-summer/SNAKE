@@ -51,7 +51,7 @@ clock = pg.time.Clock()
 class Apple(pg.sprite.Sprite):
 
     image = pg.image.load("IMG/apple.png")
-    ## TODO Изменить размер яблока на 100х100
+    ## TODO Изменить размер яблока на SIZE
 
     def __init__(self):
         self.image = Apple.image
@@ -62,7 +62,7 @@ class Apple(pg.sprite.Sprite):
     ## TODO метод change_pos() кторый назначет x и y новые координаты
 
 
-apple = Apple()
+
 
 
 # ЗМЕЯ
@@ -71,6 +71,8 @@ class Snake(pg.sprite.Sprite):
     head = pg.image.load("IMG/snake/head.png")
     body = pg.image.load("IMG/snake/body.png")
     trail = pg.image.load("IMG/snake/trail.png")
+
+    # TODO изменить размер всех трёх кусков змеи на SIZE
 
     block = pg.Surface((SIZE, SIZE))
     block.fill((255,0,0))
@@ -85,11 +87,14 @@ class Snake(pg.sprite.Sprite):
         self.speed_x = 0
         self.speed_y = 0
         self.cooldown = pygame.time.get_ticks()
+        self.isApple = False
+        self.score = 0
+
 
 
     def update(self, events):
         for e in events:
-            print(e)
+
             if e.type == pg.KEYDOWN:
                 if e.key == pg.K_LEFT:
                     self.speed_x = -SIZE
@@ -106,15 +111,21 @@ class Snake(pg.sprite.Sprite):
                     self.speed_y = SIZE
                     self.speed_x = 0
 
-        if pygame.time.get_ticks() - self.cooldown > 400:
+        if pygame.time.get_ticks() - self.cooldown > 200 and (self.speed_x != 0 or self.speed_y != 0):
 
             self.body.insert(0, self.rect.copy())
-            self.body.pop()
+            if self.isApple == False:
+                self.body.pop()
+                self.isApple = False
 
             self.rect.x += self.speed_x
             self.rect.y += self.speed_y
             self.cooldown = pygame.time.get_ticks()
 
+    def eat_apple(self):
+        ## TODO этот метод должен запускаться для змеи если она столкнулась с яблоком
+        ## TODO Увеличить переменную self.score
+        self.isApple = True
 
 
     def draw(self):
@@ -123,17 +134,18 @@ class Snake(pg.sprite.Sprite):
         for block in self.body:
             sc.blit(Snake.block, block)
 
+    def collide(self):
+        # TODO Что должна делать змея при столкновении?
+        # TODO вернуться в начало, отбросить хвост, обнулить счёт
+        pass
 
 
 
 
+
+apple = Apple()
 snake = Snake(400, 200)
 
-
-
-
-speed_x = 0
-speed_y = 0
 
 
 
@@ -153,7 +165,8 @@ while game:
 
 
 
-    if apple.rect.colliderect(snake.rect):
+    if apple.rect.colliderect(snake.rect):  ## Проверка столкновения змеи с яблоком
+        ## TODO Яблоко запускает метод change_pos, змея запускает метод eat_apple
         print(123)
 
     if snake.rect.top <= 0 or snake.rect.bottom >= H:
@@ -164,6 +177,7 @@ while game:
 
     if snake.rect.left <= 0 or snake.rect.right >= W:
         game = False
+        ## TODO Змея должна вернуться в начало
 
 
 
