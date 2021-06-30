@@ -40,6 +40,10 @@ sc = pg.display.set_mode((W, H))  # длина высота окна
 FPS = 60
 clock = pg.time.Clock()
 
+# GAME OVER
+font = pygame.font.Font(None, 20)
+text = font.render("Game over!", True, (255, 0, 0))
+
 # snake HEAD ГОЛОВА ЗМЕИ
 # PUR = (100, 128, 255)  #ЦВЕТ ЗМЕИ
 # head = pg.draw.rect(sc, PUR, (480, 350, 60, 60), 8)
@@ -110,7 +114,8 @@ while game:
         print(123)
 
     if snake.rect.top <= 0 or snake.rect.bottom >= H:
-        game = False
+        textpos = (10, 10)
+        screen.blit(text, textpos)
 
     if snake.rect.left <= 0 or snake.rect.right >= W:
         game = False
