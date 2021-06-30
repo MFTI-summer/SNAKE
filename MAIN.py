@@ -23,8 +23,6 @@ def play_music():
         print('mt', mt)
         if mt >= 3:
             mt = 0
-        # mt%= 4
-
         mt += 1
         nm = f"SOUNDS/music{mt}.ogg"
         pygame.mixer.music.load(nm)
