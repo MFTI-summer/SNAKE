@@ -56,6 +56,8 @@ class Apple(pg.sprite.Sprite):
         self.rect.x = 200
         self.rect.y = 400
 
+    ## TODO метод change_pos() кторый назначет x и y новые координаты
+
 
 apple = Apple()
 
@@ -111,7 +113,7 @@ while game:
 
     if snake.rect.top <= 0 or snake.rect.bottom >= H:
         game = False
-
+        ## TODO Змея должна вернуться в начало
 
 
     sc.fill((0, 0, 0))
