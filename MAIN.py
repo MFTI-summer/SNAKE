@@ -3,6 +3,7 @@ import sys
 
 #### from pygame.locals import * - чтобы меньше писать
 import pygame.sprite
+from random import randint
 
 pg.init()
 
@@ -27,9 +28,10 @@ def play_music():
 
 
 ### ЭКРАН
-W = 1000  # ширина
+W = 800  # ширина
 H = 800  # высота
 SIZE = 20
+
 sc = pg.display.set_mode((W, H))  # длина высота окна
 
 # FPS
@@ -49,7 +51,10 @@ class Apple(pg.sprite.Sprite):
         self.rect.x = 200
         self.rect.y = 400
 
-    ## TODO метод change_pos() кторый назначет x и y новые координаты
+    def change_pos(self):
+        self.rect.x = randint(0, 600)
+        self.rect.y = randint(0, 500)
+
 
 
 # ЗМЕЯ
@@ -118,8 +123,17 @@ class Snake(pg.sprite.Sprite):
             sc.blit(Snake.block, block)
 
     def collide(self):
+        self.rect.x = 400
+        self.rect.y = 200
+        self.speed_x = 0
+        self.speed_y = 0
+
+        ## обнуление счета
+
+
+
         # TODO Что должна делать змея при столкновении?
-        # TODO вернуться в начало, отбросить хвост, обнулить счёт
+        # TODO  отбросить хвост, обнулить счёт
         pass
 
 
@@ -140,18 +154,21 @@ while game:
 
     snake.update(events)
 
-    if apple.rect.colliderect(snake.rect):  ## Проверка столкновения змеи с яблоком
+    if apple.rect.colliderect(snake.rect): ## Проверка столкновения змеи с яблоком
+        apple.change_pos()
+
+
         ## TODO Яблоко запускает метод change_pos, змея запускает метод eat_apple
         print("Змея сталкивается с яблоком")
 
     if snake.rect.top <= 0 or snake.rect.bottom >= H:
-        game = False
-
-        ## TODO Змея должна вернуться в начало
+        snake.collide()
+        #game = False
 
     if snake.rect.left <= 0 or snake.rect.right >= W:
-        game = False
-        ## TODO Змея должна вернуться в начало
+        snake.collide()
+        #game = False
+
 
 
     ## ОТРИСОВКА на экран
