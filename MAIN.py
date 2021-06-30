@@ -29,7 +29,7 @@ def play_music():
 
 ### ЭКРАН
 W = 1000 # ширина
-H = 800  # высота
+H = 800 # высота
 SIZE = 20
 
 sc = pg.display.set_mode((W, H))  # длина высота окна
@@ -37,6 +37,15 @@ sc = pg.display.set_mode((W, H))  # длина высота окна
 # FPS
 FPS = 60
 clock = pg.time.Clock()
+
+# LIFES
+"""""
+lifes = 3
+t1 = pg.font.Font(None, 36)
+text1 = t1.render('Lifes:', True, (255, 255, 0))
+t2 = pg.font.Font(None, 36)
+text2 = t2.render(str(lifes), True, (255, 0, 0))
+"""
 
 
 # ЯБЛОКО
@@ -52,8 +61,8 @@ class Apple(pg.sprite.Sprite):
         self.rect.y = 400
 
     def change_pos(self):
-        self.rect.x = randint(0, 1000)
-        self.rect.y = randint(0, 800)
+        self.rect.x = randint(0, 700)
+        self.rect.y = randint(0, 500)
 
 
 
@@ -84,6 +93,7 @@ class Snake(pg.sprite.Sprite):
     def update(self, events):
         for e in events:
 
+
             if e.type == pg.KEYDOWN:
                 if e.key == pg.K_LEFT:
                     self.speed_x = -SIZE
@@ -112,9 +122,12 @@ class Snake(pg.sprite.Sprite):
             self.cooldown = pygame.time.get_ticks()
 
     def eat_apple(self):
+        self.isApple = True
+        
+
         ## TODO этот метод должен запускаться для змеи если она столкнулась с яблоком
         ## TODO Увеличить переменную self.score
-        self.isApple = True
+        #self.isApple = True
 
     def draw(self):
         sc.blit(Snake.block, self.rect)
@@ -123,13 +136,15 @@ class Snake(pg.sprite.Sprite):
             sc.blit(Snake.block, block)
 
     def collide(self):
-        self.rect.x = 400
-        self.rect.y = 200
-        self.speed_x = 0
-        self.speed_y = 0
+        if self.rect.x == 1000:
+            self.rect.x = 0
+        elif self.rect.x == 0:
+            self.rect.x = 1000
 
-        ## обнуление счета
-
+        if self.rect.y == 1000:
+            self.rect.y = 0
+        elif self.rect.y == 0:
+            self.rect.y = 1000
 
 
         # TODO Что должна делать змея при столкновении?
@@ -157,7 +172,6 @@ while game:
     if apple.rect.colliderect(snake.rect): ## Проверка столкновения змеи с яблоком
         apple.change_pos()
 
-
         ## TODO Яблоко запускает метод change_pos, змея запускает метод eat_apple
         print("Змея сталкивается с яблоком")
 
@@ -173,6 +187,9 @@ while game:
 
     ## ОТРИСОВКА на экран
     sc.fill((0, 0, 0))
+
+    #sc.blit(text1, (900, 50))
+    #sc.blit(text2, (980, 50))
     sc.blit(apple.image, apple.rect)
     snake.draw()
 
