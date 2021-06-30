@@ -128,4 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea
-Maxim/Максим.py
+_Maxim/Максим.py
