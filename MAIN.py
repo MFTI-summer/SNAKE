@@ -50,7 +50,7 @@ clock = pg.time.Clock()
 # ЯБЛОКО
 class Apple(pg.sprite.Sprite):
 
-    image = pg.image.load("IMG/apple.png")
+    image = pg.image.load("_Maxim/Apple.png")
     ## TODO Изменить размер яблока на 100х100
 
     def __init__(self):
