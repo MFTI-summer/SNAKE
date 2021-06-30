@@ -52,8 +52,8 @@ class Apple(pg.sprite.Sprite):
         self.rect.y = 400
 
     def change_pos(self):
-        self.rect.x = randint(0, 600)
-        self.rect.y = randint(0, 500)
+        self.rect.x = randint(0, 1000)
+        self.rect.y = randint(0, 800)
 
 
 
