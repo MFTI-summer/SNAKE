@@ -19,7 +19,7 @@ def play_music():
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.unload()
         print('mt', mt)
-        if mt >= 3:
+        if mt >= 4:
             mt = 0
         mt += 1
         nm = f"SOUNDS/music{mt}.ogg"
@@ -31,7 +31,7 @@ def play_music():
 W = 1000 # ширина
 H = 800 # высота
 SIZE = 20
-
+APPLESIZE = 40
 sc = pg.display.set_mode((W, H))  # длина высота окна
 
 # FPS
@@ -51,7 +51,7 @@ text2 = t2.render(str(lifes), True, (255, 0, 0))
 # ЯБЛОКО
 class Apple(pg.sprite.Sprite):
     image = pg.image.load("_Maxim/Apple.png")
-
+    image = pg.transform.scale(image, (APPLESIZE, APPLESIZE))
     ## TODO Изменить размер яблока на SIZE
 
     def __init__(self):
@@ -72,7 +72,15 @@ class Snake(pg.sprite.Sprite):
     body = pg.image.load("IMG/snake/body.png")
     trail = pg.image.load("IMG/snake/trail.png")
 
+    head = pg.transform.scale(head, (SIZE, SIZE))
+    body = pg.transform.scale(body, (SIZE, SIZE))
+    trail = pg.transform.scale(trail, (SIZE, SIZE))
+    block = pg.Surface((SIZE, SIZE))
+    block.fill((255,0,0))
+
+
     # TODO изменить размер всех трёх кусков змеи на SIZE
+
 
     block = pg.Surface((SIZE, SIZE))
     block.fill((0, 255, 0))
