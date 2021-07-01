@@ -31,7 +31,7 @@ def play_music():
 W = 1000 # ширина
 H = 800 # высота
 SIZE = 20
-
+APPLESIZE = 40
 sc = pg.display.set_mode((W, H))  # длина высота окна
 
 # FPS
@@ -51,7 +51,7 @@ text2 = t2.render(str(lifes), True, (255, 0, 0))
 # ЯБЛОКО
 class Apple(pg.sprite.Sprite):
     image = pg.image.load("_Maxim/Apple.png")
-
+    image = pg.transform.scale(image, (APPLESIZE, APPLESIZE))
     ## TODO Изменить размер яблока на SIZE
 
     def __init__(self):
