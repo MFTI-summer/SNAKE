@@ -71,7 +71,9 @@ class Snake(pg.sprite.Sprite):
     head = pg.image.load("IMG/snake/head.png")
     body = pg.image.load("IMG/snake/body.png")
     trail = pg.image.load("IMG/snake/trail.png")
-
+    head = pg.transform.scale(head, (SIZE, SIZE))
+    body = pg.transform.scale(body, (SIZE, SIZE))
+    trail = pg.transform.scale(trail, (SIZE, SIZE))
     block = pg.Surface((SIZE, SIZE))
     block.fill((255,0,0))
 
