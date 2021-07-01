@@ -123,7 +123,7 @@ class Snake(pg.sprite.Sprite):
 
     def eat_apple(self):
         self.isApple = True
-        
+
 
         ## TODO этот метод должен запускаться для змеи если она столкнулась с яблоком
         ## TODO Увеличить переменную self.score
