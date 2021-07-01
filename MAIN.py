@@ -19,7 +19,7 @@ def play_music():
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.unload()
         print('mt', mt)
-        if mt >= 3:
+        if mt >= 4:
             mt = 0
         mt += 1
         nm = f"SOUNDS/music{mt}.ogg"
