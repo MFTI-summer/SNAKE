@@ -71,16 +71,16 @@ class Snake(pg.sprite.Sprite):
     head = pg.image.load("IMG/snake/head.png")
     body = pg.image.load("IMG/snake/body.png")
     trail = pg.image.load("IMG/snake/trail.png")
-<<<<<<< HEAD
+
     head = pg.transform.scale(head, (SIZE, SIZE))
     body = pg.transform.scale(body, (SIZE, SIZE))
     trail = pg.transform.scale(trail, (SIZE, SIZE))
     block = pg.Surface((SIZE, SIZE))
     block.fill((255,0,0))
-=======
+
 
     # TODO изменить размер всех трёх кусков змеи на SIZE
->>>>>>> 36747a963cfb69fb34f3edee9ec5b47b135929ac
+
 
     block = pg.Surface((SIZE, SIZE))
     block.fill((0, 255, 0))
