@@ -121,8 +121,8 @@ class Snake(pg.sprite.Sprite):
             self.cooldown = pygame.time.get_ticks()
 
     def eat_apple(self):
-        self.isApple = True
-        self.score += 1
+        if self.isApple:
+            self.score += 1
 
         ## TODO этот метод должен запускаться для змеи если она столкнулась с яблоком
         ## TODO Увеличить переменную self.score
