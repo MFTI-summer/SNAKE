@@ -70,7 +70,7 @@ class Snake(pg.sprite.Sprite):
     block.fill((255, 0, 0))
 
     block = pg.Surface((SIZE, SIZE))
-    block.fill((0, 0, 40))
+    block.fill((10, 0, 60))
 
 
     COOLDOWN = 50
@@ -207,6 +207,11 @@ def main():
         if apple.rect.colliderect(snake.rect):  ## Проверка столкновения змеи с яблоком
             apple.change_pos()
             snake.eat_apple()
+
+        if snake.lives == 0:
+            game = False
+
+
 
 
 
