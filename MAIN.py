@@ -22,7 +22,6 @@ def play_music():
         pygame.mixer.music.load(nm)
         pygame.mixer.music.play(loops=1)
 
-
 ### ЭКРАН
 W = 1000  # ширина
 H = 700  # высота
@@ -227,8 +226,11 @@ def main():
 
 def end_game():
     game = True
+    pygame.mixer.music.load("SOUNDS/music5.ogg")
+    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.play(loops=-1)
     while game:
-        play_music()
+
         clock.tick(FPS)  # задержка
 
         events = pg.event.get()
@@ -245,8 +247,6 @@ def end_game():
         sc.fill((0, 0, 0))
         sc.blit(text2, (800, 50))
 
-
 main()
 end_game()
-
 pg.quit()
