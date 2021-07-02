@@ -30,7 +30,7 @@ SIZE = 20 #Размер одной клетки\блока
 APPLESIZE = 40
 sc = pg.display.set_mode((W, H))  # длина высота окна
 fon = pg.image.load("IMG/Fon.png")
-
+fon = pg.transform.scale(fon, (W, H))
 # FPS
 FPS = 60
 clock = pg.time.Clock()
@@ -53,8 +53,8 @@ class Apple(pg.sprite.Sprite):
         # self.rect.y = 400
 
     def change_pos(self):
-        self.rect.x = choice(range(0, W, APPLESIZE))
-        self.rect.y = choice(range(0, H, APPLESIZE))
+        self.rect.x = choice(range(20, W-20, APPLESIZE))
+        self.rect.y = choice(range(20, H-20, APPLESIZE))
 
 
 # ЗМЕЯ
