@@ -53,8 +53,8 @@ class Apple(pg.sprite.Sprite):
         # self.rect.y = 400
 
     def change_pos(self):
-        self.rect.x = choice(range(20, W-20, APPLESIZE))
-        self.rect.y = choice(range(20, H-20, APPLESIZE))
+        self.rect.x = choice(range(60, W-60, APPLESIZE))
+        self.rect.y = choice(range(60, H-60, APPLESIZE))
 
 
 # ЗМЕЯ
@@ -82,7 +82,7 @@ class Snake(pg.sprite.Sprite):
 
         self.body = [pg.Rect(x + SIZE, y, SIZE, SIZE), pg.Rect(x + SIZE * 2, y, SIZE, SIZE),
                      pg.Rect(x + SIZE * 3, y, SIZE, SIZE)]
-
+        self.downlives = False
         self.speed_x = 0
         self.speed_y = 0
         self.cooldown = pygame.time.get_ticks()
@@ -150,8 +150,8 @@ class Snake(pg.sprite.Sprite):
                 self.body = self.body[:i]
                 self.score = 0
                 text1 = f1.render(f'Score: {self.score}', True, (255, 0, 0))
-
-
+                self.downlives = True
+            self.downlives = False
 
     def eat_apple(self):
         global text1
@@ -176,15 +176,14 @@ class Snake(pg.sprite.Sprite):
         elif self.rect.y == 0:
             self.rect.y = 800
 
-
+    def lives(self):
+        self.lives = 20
+        if self.downlives == True:
+          self.lives -= 1
 
 ##++++++===============+++=======================================================================================================
 apple = Apple()
 snake = Snake(400, 200)
-
-
-
-
 
 def main():
     game = True
@@ -203,10 +202,8 @@ def main():
             apple.change_pos()
             snake.eat_apple()
 
-
-        # if snake.live == 0:
-        #     game = False
-
+        if snake.lives() == 0:
+            game = False
 
         ## ОТРИСОВКА на экран
         #sc.fill((0, 0, 0))
@@ -215,7 +212,6 @@ def main():
         sc.blit(apple.image, apple.rect)
         snake.draw()
         pg.display.update()  # обновление экрана
-
 
 def end_game():
     game = True
@@ -228,12 +224,9 @@ def end_game():
             if i.type == pg.QUIT:
                 game = False
 
-
-
         sc.fill((0, 0, 0))
         sc.blit(text2, (100, 50))
         pg.display.update()  # обновление экрана
-
 
 main()
 end_game()
