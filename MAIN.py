@@ -24,8 +24,8 @@ def play_music():
 
 
 ### ЭКРАН
-W = 1680  # ширина
-H = 900  # высота
+W = 1000  # ширина
+H = 700  # высота
 SIZE = 30 #Размер одной клетки\блока
 APPLESIZE = 60
 sc = pg.display.set_mode((W, H))  # длина высота окна
@@ -35,11 +35,11 @@ fon = pg.transform.scale(fon, (W, H))
 FPS = 60
 clock = pg.time.Clock()
 
-#  SCORE
+#  SCORE AND LIVES
 f1 = pg.font.Font(None, 50)  # выводит на экран надпись 'Score:'
-text1 = f1.render(f'Score: {0}', True, (255, 0, 0))
+text1 = f1.render(f'Score: {0}', True, (255, 255, 255))
 text2 = f1.render(f'GAME OVER', True, "#00796B")
-
+text3 = f1.render(f'Lives: {3}', True, (255, 255, 255))
 
 # ЯБЛОКО
 class Apple(pg.sprite.Sprite):
@@ -70,10 +70,12 @@ class Snake(pg.sprite.Sprite):
     block.fill((255, 0, 0))
 
     block = pg.Surface((SIZE, SIZE))
-    block.fill((0, 255, 0))
+    block.fill((0, 0, 40))
 
 
     COOLDOWN = 50
+
+
 
     def __init__(self, x, y):
         super().__init__()
@@ -88,6 +90,7 @@ class Snake(pg.sprite.Sprite):
         self.cooldown = pygame.time.get_ticks()
         self.isApple = False
         self.score = 0
+        self.lives = 3
 
     def update(self, events):
         for e in events:
@@ -145,11 +148,14 @@ class Snake(pg.sprite.Sprite):
 
     def chek_trail_collide(self):
         global text1
+        global text3
         for i, block in enumerate(self.body):
             if block.colliderect(self.rect):
                 self.body = self.body[:i]
                 self.score = 0
-                text1 = f1.render(f'Score: {self.score}', True, (255, 0, 0))
+                self.lives -= 1
+                text1 = f1.render(f'Score: {self.score}', True, (255, 255, 255))
+                text3 = f1.render(f'Lives: {self.lives}', True, (255, 255, 255))
                 self.downlives = True
             self.downlives = False
 
@@ -157,7 +163,7 @@ class Snake(pg.sprite.Sprite):
         global text1
         self.isApple = True
         self.score += 1
-        text1 = f1.render(f'Score: {self.score}', True, (255, 0, 0))
+        text1 = f1.render(f'Score: {self.score}', True, (255, 255, 255))
 
     def draw(self):
         sc.blit(Snake.block, self.rect)
@@ -176,10 +182,10 @@ class Snake(pg.sprite.Sprite):
         elif self.rect.y == 0:
             self.rect.y = 800
 
-    def lives(self):
-        self.lives = 20
-        if self.downlives == True:
-          self.lives -= 1
+
+
+
+
 
 ##++++++===============+++=======================================================================================================
 apple = Apple()
@@ -202,13 +208,14 @@ def main():
             apple.change_pos()
             snake.eat_apple()
 
-        if snake.lives() == 0:
-            game = False
+
+
 
         ## ОТРИСОВКА на экран
         #sc.fill((0, 0, 0))
         sc.blit(fon, (0,0))
         sc.blit(text1, (800, 50))
+        sc.blit(text3, (650, 50))
         sc.blit(apple.image, apple.rect)
         snake.draw()
         pg.display.update()  # обновление экрана
@@ -225,8 +232,14 @@ def end_game():
                 game = False
 
         sc.fill((0, 0, 0))
-        sc.blit(text2, (100, 50))
+        sc.blit(text2, (100, 200))
+
         pg.display.update()  # обновление экрана
+
+
+        sc.fill((0, 0, 0))
+        sc.blit(text2, (800, 50))
+
 
 main()
 end_game()
