@@ -23,8 +23,8 @@ def play_music():
         pygame.mixer.music.play(loops=1)
 
 ### ЭКРАН
-W = 1000  # ширина
-H = 700  # высота
+W = 1680  # ширина
+H = 900  # высота
 SIZE = 30 #Размер одной клетки\блока
 APPLESIZE = 60
 sc = pg.display.set_mode((W, H))  # длина высота окна
@@ -72,7 +72,7 @@ class Snake(pg.sprite.Sprite):
     block.fill((10, 0, 60))
 
 
-    COOLDOWN = 50
+    COOLDOWN = 100
 
 
 
