@@ -168,7 +168,7 @@ while game:
 
     if apple.rect.colliderect(snake.rect): ## Проверка столкновения змеи с яблоком
         apple.change_pos()
-        snake.eat_apple()
+        ##  snake.eat_apple()
 
         ## TODO змея запускает метод eat_apple
         print("Змея сталкивается с яблоком")
