@@ -1,9 +1,6 @@
 import pygame as pg
-import sys
-
-#### from pygame.locals import * - чтобы меньше писать
 import pygame.sprite
-from random import randint
+from random import choice
 
 pg.init()
 
@@ -12,7 +9,6 @@ pygame.mixer.init()
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.load("SOUNDS/music1.ogg")
 mt = 0
-
 
 def play_music():
     global mt
@@ -28,19 +24,21 @@ def play_music():
 
 
 ### ЭКРАН
-W = 1000 # ширина
-H = 800 # высота
-SIZE = 20
+W = 1000  # ширина
+H = 800  # высота
+SIZE = 20 #Размер одной клетки\блока
 APPLESIZE = 40
 sc = pg.display.set_mode((W, H))  # длина высота окна
+fon = pg.image.load("IMG/Fon.png")
 
 # FPS
 FPS = 60
 clock = pg.time.Clock()
 
 #  SCORE
-f1 = pg.font.Font(None, 50) # выводит на экран надпись 'Score:'
-text1 = f1.render('Score:', True, (255, 0, 0))
+f1 = pg.font.Font(None, 50)  # выводит на экран надпись 'Score:'
+text1 = f1.render(f'Score: {0}', True, (255, 0, 0))
+text2 = f1.render(f'GAME OVER', True, "#00796B")
 
 
 # ЯБЛОКО
@@ -50,14 +48,13 @@ class Apple(pg.sprite.Sprite):
 
     def __init__(self):
         self.image = Apple.image
-        self.rect = self.image.get_rect()
-        self.rect.x = 200
-        self.rect.y = 400
+        self.rect = self.image.get_rect(x = 200, y = 400)
+        # self.rect.x = 200
+        # self.rect.y = 400
 
     def change_pos(self):
-        self.rect.x = randint(0, 700)
-        self.rect.y = randint(0, 500)
-
+        self.rect.x = choice(range(0, W, APPLESIZE))
+        self.rect.y = choice(range(0, H, APPLESIZE))
 
 
 # ЗМЕЯ
@@ -70,13 +67,16 @@ class Snake(pg.sprite.Sprite):
     body = pg.transform.scale(body, (SIZE, SIZE))
     trail = pg.transform.scale(trail, (SIZE, SIZE))
     block = pg.Surface((SIZE, SIZE))
-    block.fill((255,0,0))
-
+    block.fill((255, 0, 0))
 
     block = pg.Surface((SIZE, SIZE))
     block.fill((0, 255, 0))
 
+
+    COOLDOWN = 100
+
     def __init__(self, x, y):
+        super().__init__()
         self.image = Snake.head
         self.rect = self.image.get_rect(x=x, y=y)
 
@@ -91,7 +91,6 @@ class Snake(pg.sprite.Sprite):
 
     def update(self, events):
         for e in events:
-
 
             if e.type == pg.KEYDOWN:
                 if e.key == pg.K_LEFT:
@@ -109,24 +108,56 @@ class Snake(pg.sprite.Sprite):
                     self.speed_y = SIZE
                     self.speed_x = 0
 
-        if pygame.time.get_ticks() - self.cooldown > 200 and (self.speed_x != 0 or self.speed_y != 0):
+        self.move()
 
+    def move(self):
+
+        # Проверяем, что прошло достаточно времени для движения
+        if pygame.time.get_ticks() - self.cooldown > Snake.COOLDOWN and (self.speed_x != 0 or self.speed_y != 0):
+
+            self.cooldown = pygame.time.get_ticks()
+            #записываем старую позицию головы в туловище
             self.body.insert(0, self.rect.copy())
+
+            # Если не съели яблоко, то удаляем конец хвоста
             if self.isApple == False:
                 self.body.pop()
+            else:
                 self.isApple = False
 
+
+            #Двигаемся по x
             self.rect.x += self.speed_x
+
+            if self.rect.bottom <= 0: #если вышли за верхнюю границу экрана
+                self.rect.bottom = H
+            if self.rect.top >= H:#если вышли за нижнюю границу экрана
+                self.rect.top = 0
+
             self.rect.y += self.speed_y
-            self.cooldown = pygame.time.get_ticks()
+            if self.rect.left >= W: #если вышли за правую границу экрана
+                self.rect.left = 0
+
+            if self.rect.right <= 0:#если вышли за левую границу экрана
+                self.rect.right = W
+
+            self.chek_trail_collide()
+
+    def chek_trail_collide(self):
+        global text1
+        for i, block in enumerate(self.body):
+            if block.colliderect(self.rect):
+                self.body = self.body[:i]
+                self.score = 0
+                text1 = f1.render(f'Score: {self.score}', True, (255, 0, 0))
+
+
 
     def eat_apple(self):
-        if self.isApple:
-            self.score += 1
-
-        ## TODO этот метод должен запускаться для змеи если она столкнулась с яблоком
-        ## TODO Увеличить переменную self.score
-
+        global text1
+        self.isApple = True
+        self.score += 1
+        text1 = f1.render(f'Score: {self.score}', True, (255, 0, 0))
 
     def draw(self):
         sc.blit(Snake.block, self.rect)
@@ -145,52 +176,66 @@ class Snake(pg.sprite.Sprite):
         elif self.rect.y == 0:
             self.rect.y = 800
 
-        pass
 
 
+##++++++===============+++=======================================================================================================
 apple = Apple()
 snake = Snake(400, 200)
 
 
-game = True
-while game:
-    clock.tick(FPS)  # задержка
-
-    play_music()
-
-    events = pg.event.get()
-
-    for i in events:  # в пг из папки ивент фн гет, присваиает перем зн
-        if i.type == pg.QUIT:
-            game = False
-
-    snake.update(events)
-
-    if apple.rect.colliderect(snake.rect): ## Проверка столкновения змеи с яблоком
-        apple.change_pos()
-        ##  snake.eat_apple()
-
-        ## TODO змея запускает метод eat_apple
-        print("Змея сталкивается с яблоком")
-
-    if snake.rect.top <= 0 or snake.rect.bottom >= H:
-        snake.collide()
-        #game = False
-
-    if snake.rect.left <= 0 or snake.rect.right >= W:
-        snake.collide()
-        #game = False
 
 
 
-    ## ОТРИСОВКА на экран
-    sc.fill((0, 0, 0))
+def main():
+    game = True
+    while game:
+        play_music()
+        clock.tick(FPS)  # задержка
 
-    sc.blit(text1, (800, 50))
-    sc.blit(apple.image, apple.rect)
-    snake.draw()
+        events = pg.event.get()
+        for i in events:  # в пг из папки ивент фн гет, присваиает перем зн
+            if i.type == pg.QUIT:
+                game = False
+
+        snake.update(events)
+
+        if apple.rect.colliderect(snake.rect):  ## Проверка столкновения змеи с яблоком
+            apple.change_pos()
+            snake.eat_apple()
 
 
-    pg.display.update()  # обновление экрана
+        # if snake.live == 0:
+        #     game = False
+
+
+        ## ОТРИСОВКА на экран
+        #sc.fill((0, 0, 0))
+        sc.blit(fon, (0,0))
+        sc.blit(text1, (800, 50))
+        sc.blit(apple.image, apple.rect)
+        snake.draw()
+        pg.display.update()  # обновление экрана
+
+
+def end_game():
+    game = True
+    while game:
+        play_music()
+        clock.tick(FPS)  # задержка
+
+        events = pg.event.get()
+        for i in events:  # в пг из папки ивент фн гет, присваиает перем зн
+            if i.type == pg.QUIT:
+                game = False
+
+
+
+        sc.fill((0, 0, 0))
+        sc.blit(text2, (100, 50))
+        pg.display.update()  # обновление экрана
+
+
+main()
+end_game()
 
 pg.quit()
