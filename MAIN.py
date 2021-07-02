@@ -24,10 +24,10 @@ def play_music():
 
 
 ### ЭКРАН
-W = 1000  # ширина
-H = 800  # высота
-SIZE = 20 #Размер одной клетки\блока
-APPLESIZE = 40
+W = 1680  # ширина
+H = 900  # высота
+SIZE = 30 #Размер одной клетки\блока
+APPLESIZE = 60
 sc = pg.display.set_mode((W, H))  # длина высота окна
 fon = pg.image.load("IMG/Fon.png")
 fon = pg.transform.scale(fon, (W, H))
@@ -73,7 +73,7 @@ class Snake(pg.sprite.Sprite):
     block.fill((0, 255, 0))
 
 
-    COOLDOWN = 100
+    COOLDOWN = 50
 
     def __init__(self, x, y):
         super().__init__()
