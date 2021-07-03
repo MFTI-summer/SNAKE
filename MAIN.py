@@ -89,7 +89,7 @@ class Snake(pg.sprite.Sprite):
         self.cooldown = pygame.time.get_ticks()
         self.isApple = False
         self.score = 0
-        self.lives = 3
+        self.lives = 7
 
     def update(self, events):
         for e in events:
@@ -227,7 +227,7 @@ def main():
 def end_game():
     game = True
     pygame.mixer.music.load("SOUNDS/music5.ogg")
-    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(loops=-1)
     while game:
 
