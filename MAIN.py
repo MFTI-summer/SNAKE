@@ -38,7 +38,7 @@ clock = pg.time.Clock()
 f1 = pg.font.Font(None, 50)  # выводит на экран надпись 'Score:'
 text1 = f1.render(f'Score: {0}', True, (255, 255, 255))
 text2 = f1.render(f'GAME OVER', True, "#00796B")
-text3 = f1.render(f'Lives: {3}', True, (255, 255, 255))
+text3 = f1.render(f'Lives: {7}', True, (255, 255, 255))
 
 # ЯБЛОКО
 class Apple(pg.sprite.Sprite):
